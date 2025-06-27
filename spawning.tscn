@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cman8fkx60jp0"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wc5p8"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jsk3o"]
+height = 1.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4arys"]
+height = 1.0
+
+[node name="RigidBody3D" type="RigidBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_wc5p8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_jsk3o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_4arys")

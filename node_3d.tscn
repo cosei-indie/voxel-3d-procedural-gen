@@ -1,0 +1,56 @@
+[gd_scene load_steps=11 format=3 uid="uid://bml5jklk1y5qw"]
+
+[ext_resource type="Script" uid="uid://7ibuwbrm3y77" path="res://node_3d.gd" id="1_r3fl7"]
+[ext_resource type="PackedScene" uid="uid://bpov42l2prn4p" path="res://assets/dirt.gltf" id="2_a0tk4"]
+[ext_resource type="PackedScene" uid="uid://dsdbnkxguf5gy" path="res://assets/sand.gltf" id="2_noarx"]
+[ext_resource type="Script" uid="uid://do0g0uejvm7cs" path="res://camera_3d.gd" id="3_a0tk4"]
+[ext_resource type="PackedScene" uid="uid://u0p1e104tava" path="res://assets/stone.gltf" id="4_wc5p8"]
+[ext_resource type="PackedScene" uid="uid://cpa2kxtprw3y5" path="res://assets/water.gltf" id="5_jsk3o"]
+[ext_resource type="PackedScene" uid="uid://b6g37b00awqva" path="res://assets/grass.gltf" id="6_4arys"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wc5p8"]
+seed = 215
+frequency = 0.013
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jsk3o"]
+noise = SubResource("FastNoiseLite_wc5p8")
+
+[sub_resource type="Environment" id="Environment_wc5p8"]
+background_mode = 1
+background_color = Color(0.405178, 0.592296, 1, 1)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_r3fl7")
+dirt_scene = ExtResource("2_a0tk4")
+sand_scene = ExtResource("2_noarx")
+stone_scene = ExtResource("4_wc5p8")
+water_scene = ExtResource("5_jsk3o")
+grass_scene = ExtResource("6_4arys")
+noise_height_text = SubResource("NoiseTexture2D_jsk3o")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.782673, 0.622433, 0, -0.622433, 0.782673, 0.558044, 20.7295, 24.7326)
+script = ExtResource("3_a0tk4")
+
+[node name="DirtGenerator" type="MultiMeshInstance3D" parent="."]
+unique_name_in_owner = true
+
+[node name="SandGenerator" type="MultiMeshInstance3D" parent="."]
+unique_name_in_owner = true
+
+[node name="WaterGenerator" type="MultiMeshInstance3D" parent="."]
+unique_name_in_owner = true
+
+[node name="StoneGenerator" type="MultiMeshInstance3D" parent="."]
+unique_name_in_owner = true
+
+[node name="GrassGenerator" type="MultiMeshInstance3D" parent="."]
+unique_name_in_owner = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 0, 0)
+light_energy = 0.5
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wc5p8")
